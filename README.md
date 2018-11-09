@@ -1,4 +1,4 @@
-# Share-and-Go
+# Share & Go !
 MVP d'une application de partage d'activité à une communautée réalisée en React js avec un backend en Node.js, Redux et une base de données MongoDB.
 
 Liste des fonctionnalités:
