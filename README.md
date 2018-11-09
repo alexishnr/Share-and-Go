@@ -16,6 +16,6 @@ Liste des fonctionnalités:
 - Possibilité de modifier ses informations personnelles depuis une page "Modifier mes informations" ainsi qu'y changer son password.
 - Déconnexion de l'utilisateur.
 
-Site visible sur https://shareandgo.herokuapp.com/
+Site visible sur: https://shareandgo.herokuapp.com/
 
 Bonne visite =)
