@@ -21,7 +21,6 @@ class Home extends React.Component {
   };
 
 componentDidMount(){
-
   var ctx = this;
   fetch('https://shareandgo-backend.herokuapp.com/')
     .then(function(response) {
@@ -32,8 +31,6 @@ componentDidMount(){
       ctx.setState({
         activities:data
       })
-     console.log(ctx.state.activities);
-     console.log('request success');
     })
     .catch(function(error) {
       console.log('Request failed', error)
@@ -41,10 +38,6 @@ componentDidMount(){
 }
 
   render() {
-
-      console.log(this.state.isLoggedIn, "isLoggedIn???####");
-      console.log(this.state.user, "user???");
-
     return (
       <div>
        <NavBar/>
@@ -55,18 +48,18 @@ componentDidMount(){
               <h3 className="subTitle">Partagez vos activités avec notre communauté !</h3>
               <div style={{margin:'auto'}}>
                 <Link to="/see-activities"><Button  color="info" className="btn btn-primary" style={{margin:20}}>Voir les activités</Button></Link>
-                {this.state.isLoggedIn?(  <Link to="/post-activity"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>):(<Link to="/connexion-page"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>)}
-
-
+                {this.state.isLoggedIn?(
+                  <Link to="/post-activity">
+                    <Button  color="primary" className="btn btn-primary">Proposer une activité</Button>
+                  </Link>
+                ):(
+                  <Link to="/connexion-page">
+                    <Button  color="primary" className="btn btn-primary">Proposer une activité</Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
-        </div>
-        <div className="activityList">
-        <Container>
-        <Row>
-        </Row>
-        </Container>
         </div>
         <div className="footer">
           <div class="column width-12 center">
@@ -80,8 +73,6 @@ componentDidMount(){
     );
   }
 }
-
-
 
 function mapStateToProps(store) {
   return { isLoggedIn: store.isLoggedIn, user:store.user }

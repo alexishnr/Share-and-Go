@@ -11,17 +11,12 @@ import {connect} from 'react-redux';
 class ConnexionPage extends React.Component {
 constructor(props){
   super(props)
-
   this.state={
     connexion:false,
     buttonSwitch:'',
     isLoggedIn: this.props.isLoggedIn
-
   }
-
 };
-
-
 
 switchConnexion= () =>{
   this.setState({
@@ -40,20 +35,22 @@ switchConnexion= () =>{
       <div>
         <Container>
          <Row>
-         <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', margin:'auto', marginBottom:100}}>
-         <Media query="(max-width: 599px)">
-          {matches =>
-            matches ? (
-            <h1 style={{marginTop:100, marginBottom:80, textAlign:"center", fontSize:35}}>Connectez-vous pour partager !</h1>):(<h1 style={{marginTop:100, marginBottom:80, textAlign:"center"}}>Connectez-vous pour partager !</h1>)}
-          </Media>
-           <Form style={{marginLeft:'auto', marginRight:'auto', marginTop:50}}>
-         {this.state.connexion? (<Login/>):(<Signup/>)}
-         <div style={{display:'flex', marginTop:30, marginLeft:'auto', marginRight:'auto',  justifyContent:'center', alignItems:'center',}}>
-           {!this.props.isLoggedIn? (<Button style={{marginRight:'10px'}}color="secondary" className="btn btn-primary" onClick={this.switchConnexion}>{this.state.buttonSwitch}</Button>):(null)}
-            <Link to="/"><Button  color="secondary" className="btn btn-primary">Retour</Button></Link>
-          </div>
-          </Form>
-         </div>
+           <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', margin:'auto', marginBottom:100}}>
+             <Media query="(max-width: 599px)">
+              {matches =>
+                matches ? (
+                <h1 style={{marginTop:100, marginBottom:80, textAlign:"center", fontSize:35}}>Connectez-vous pour partager !</h1>):(<h1 style={{marginTop:100, marginBottom:80, textAlign:"center"}}>Connectez-vous pour partager !</h1>)}
+              </Media>
+               <Form style={{marginLeft:'auto', marginRight:'auto', marginTop:50}}>
+             {this.state.connexion? (<Login/>):(<Signup/>)}
+             <div style={{display:'flex', marginTop:30, marginLeft:'auto', marginRight:'auto',  justifyContent:'center', alignItems:'center',}}>
+               {!this.props.isLoggedIn? (<Button style={{marginRight:'10px'}}color="secondary" className="btn btn-primary" onClick={this.switchConnexion}>{this.state.buttonSwitch}</Button>):(null)}
+                <Link to="/">
+                  <Button  color="secondary" className="btn btn-primary">Retour</Button>
+                </Link>
+              </div>
+              </Form>
+            </div>
          </Row>
         </Container>
       </div>

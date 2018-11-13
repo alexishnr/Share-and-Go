@@ -5,7 +5,6 @@ import {Container, Row, Form, Label, Input, FormGroup, Button} from 'reactstrap'
 import NavBar from '../Navbar/Navbar'
 import {connect} from 'react-redux';
 
-
 class Login extends React.Component {
 constructor(props){
   super(props)
@@ -15,13 +14,9 @@ constructor(props){
     error:'',
     isLoggedIn:this.props.isLoggedIn,
   }
-
 };
 
-
 handleSubmit(event){
-
-
   event.preventDefault();
   console.log('sent !');
   var ctx = this;
@@ -46,16 +41,12 @@ handleSubmit(event){
         ctx.props.handleSubmitRedux(isLoggedIn)
         ctx.props.userInfos(userInfos)
 
-      console.log('connecté');
-      // this.props.history.goBack();
         ctx.setState({
           email:'',
           password:'',
           isLoggedIn: true,
           error:'',
           })
-
-
       }else{
         console.log('non connecté');
         ctx.setState({
@@ -65,7 +56,6 @@ handleSubmit(event){
           isLoggedIn: false
           })
       }
-   console.log('request success');
   })
   .catch(function(error) {
     console.log('Request failed', error)
@@ -73,12 +63,10 @@ handleSubmit(event){
 }
 
   render() {
-  console.log(this.state.isLoggedIn, "isLoggedIn???");
-console.log('???????????');
-
     return (
       <div>
-      {!this.state.isLoggedIn?(<div style={{marginBottom:100}}>
+      {!this.state.isLoggedIn?(
+        <div style={{marginBottom:100}}>
             <Form>
               <FormGroup>
                 <Label for="exampleEmail">Adresse email</Label>
@@ -90,17 +78,17 @@ console.log('???????????');
               </FormGroup>
                 <Button style={{margin:'auto'}} color="primary" type="submit" onClick={this.handleSubmit.bind(this)} className="btn btn-primary">Envoyer</Button>
             </Form>
-            <span>{this.state.error}</span>
-      </div>):(
+            <span style={{margin:10}}>{this.state.error}</span>
+        </div>):(
         <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-        <h3 style={{textAlign:'center'}}>Félicitations vous êtes désormais connecté ! Vous pouvez maintenant :</h3>
-        <div style={{margin:'auto'}}>
-          <Link to="/see-activities"><Button  color="info" className="btn btn-primary" style={{margin:20}}>Voir les activités</Button></Link>
-          <Link to="/post-activity"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>
+          <h3 style={{textAlign:'center'}}>Félicitations vous êtes désormais connecté ! Vous pouvez maintenant :</h3>
+          <div style={{margin:'auto'}}>
+            <Link to="/see-activities"><Button  color="info" className="btn btn-primary" style={{margin:20}}>Voir les activités</Button></Link>
+            <Link to="/post-activity"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>
+          </div>
         </div>
+        )}
       </div>
-      )}
-</div>
     );
   }
 }

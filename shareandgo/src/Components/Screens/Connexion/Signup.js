@@ -20,7 +20,6 @@ constructor(){
   }
 };
 
-
 handleSubmit(event){
   event.preventDefault();
   console.log('sent !');
@@ -36,44 +35,35 @@ handleSubmit(event){
   method: 'POST',
   headers: {'Content-Type':'application/x-www-form-urlencoded'},
   body: 'email='+email+'&passwordOne='+passwordOne+'&city='+city+'&genre='+genre+'&userName='+userName+'&activities='+activities
-}).then(function(response) {
-    return response.json();
-  })
-  .then(function(user) {
-    console.log("retour fetch user ", user);
+  }).then(function(response) {
+      return response.json();
+    })
+    .then(function(user) {
+        if(user){
+          var isLoggedIn = true
+          var userInfos = user;
+          ctx.props.handleSubmitRedux(isLoggedIn)
+          ctx.props.userInfos(userInfos)
 
-      if(user){
-        var isLoggedIn = true
-        var userInfos = user;
+          ctx.setState({
+            email:'',
+            password:'',
+            isLoggedIn: true,
+            error:'',
+            })
 
-      console.log(userInfos,'userInfos');
-        console.log(userInfos, 'user infos');
-        ctx.props.handleSubmitRedux(isLoggedIn)
-        ctx.props.userInfos(userInfos)
-
-      console.log('connecté');
-
-        ctx.setState({
-          email:'',
-          password:'',
-          isLoggedIn: true,
-          error:'',
-          })
-
-      }else{
-        console.log('non connecté');
-        ctx.setState({
-          email:'',
-          password:'',
-          error:'Votre email ou votre mot de passe est érroné',
-          isLoggedIn: false
-          })
-}
-})
+        }else{
+          ctx.setState({
+            email:'',
+            password:'',
+            error:'Votre email ou votre mot de passe est érroné',
+            isLoggedIn: false
+            })
+        }
+    })
 }
 
   render() {
-    console.log(this.state.genre);
     return (
       <div>
       {!this.state.isLoggedIn?(  <Form>
@@ -110,12 +100,11 @@ handleSubmit(event){
           <Button style={{margin:'auto'}} color="primary" type="submit" onClick={this.handleSubmit} className="btn btn-primary">Envoyer</Button>
         </Form>):(
         <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-        <h3 style={{textAlign:'center'}}>Félicitations vous êtes désormais connecté ! Vous pouvez maintenant :</h3>
-
-        <div style={{margin:'auto'}}>
-          <Link to="/see-activities"><Button  color="info" className="btn btn-primary" style={{margin:20}}>Voir les activités</Button></Link>
-          <Link to="/post-activity"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>
-        </div>
+          <h3 style={{textAlign:'center'}}>Félicitations vous êtes désormais connecté ! Vous pouvez maintenant :</h3>
+          <div style={{margin:'auto'}}>
+            <Link to="/see-activities"><Button  color="info" className="btn btn-primary" style={{margin:20}}>Voir les activités</Button></Link>
+            <Link to="/post-activity"><Button  color="primary" className="btn btn-primary">Proposer une activité</Button></Link>
+          </div>
         </div>
       )}
       </div>

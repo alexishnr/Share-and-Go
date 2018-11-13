@@ -25,34 +25,28 @@ class NavBar extends React.Component {
     var ctx = this;
     fetch('https://shareandgo-backend.herokuapp.com/logout', {
   })
-  .then(function(response) {
-      return response.json();
-    })
+    .then(function(response) {
+        return response.json();
+      })
     .then(function(isLoggedIn) {
-
       ctx.props.logoutSubmitRedux(isLoggedIn)
 
-      console.log("retour fetch");
-
-        console.log('déconnecté');
-          ctx.setState({
-            isLoggedIn: true
-            })
-
-     console.log('request success');
+      ctx.setState({
+      isLoggedIn: true
+      })
     })
-    .catch(function(error) {
-      console.log('Request failed', error)
-    });
+      .catch(function(error) {
+        console.log('Request failed', error)
+      });
   }
 
   render() {
-    console.log(this.state.isLoggedIn, 'isss');
     return (
       <div>
           <Navbar color="dark" light expand="md" className="navbar">
-          <Link style={{ textDecoration:'none', color:"#fff"}} to="/"><NavbarBrand className="navbar">Share & Go !</NavbarBrand></Link>
-
+            <Link style={{ textDecoration:'none', color:"#fff"}} to="/">
+              <NavbarBrand className="navbar">Share & Go !</NavbarBrand>
+            </Link>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
